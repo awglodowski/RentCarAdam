@@ -1,0 +1,19 @@
+<form action="{% url 'user-detail' request.user.id %}"><input type="submit" value="User profile"/></form>
+<form method="get">
+    {{ filter.form.as_p }}
+    <button type="submit">Filter</button>
+</form>
+
+<h1>Cars list</h1>
+<ul>
+    <!-- Iterate over object_list -->
+    {% for object in object_list %}
+    <!-- Display Objects -->
+    <li>{{ object.id }} {{ object.make }} {{ object.model }} <form action="{% url 'cars-detail' object.id %}"><input type="submit" value="Detail"/></form></li>
+
+    <hr/>
+    <!-- If object_list is empty  -->
+    {% empty %}
+    <li>No available cars</li>
+    {% endfor %}
+</ul>

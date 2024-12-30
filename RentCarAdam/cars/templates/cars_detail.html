@@ -1,0 +1,91 @@
+<!--<form action="{% url 'cars-list' %}"><input type="submit" value="Cars list"/></form>-->
+<!--<h1>Car {{ object.make }} {{ object.model }}</h1>-->
+<!--<p>Details:</p>-->
+<!--<ul>-->
+<!--    <li>Make: {{ object.make }} </li>-->
+<!--    <li>Model: {{ object.model }}</li>-->
+<!--    <li>Category: {{ object.category }}</li>-->
+<!--    <li>Price per day: {{ object.price_per_day }}</li>-->
+
+<!--</ul>-->
+
+<!--<form method="POST" action="{% url 'car-reserve' object.id %}">-->
+<!--    {% csrf_token %}-->
+<!--    {% for field in form %}-->
+<!--    <div class="fieldWrapper">-->
+<!--        {{ field.label_tag }} {{ field }}-->
+<!--        <div style="color: red">-->
+<!--            {{ field.errors }}-->
+<!--        </div>-->
+<!--        {% if field.help_text %}-->
+<!--          <p class="help" id="{{ field.auto_id }}_helptext">-->
+<!--            {{ field.help_text|safe }}-->
+<!--          </p>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--    {% endfor %}-->
+<!--    <div style="color: red">-->
+<!--        {{ form.non_field_errors }}-->
+<!--    </div>-->
+<!--    <input type="submit" value="Reserve"/>-->
+<!--</form>-->
+
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+<form action="{% url 'cars-list' %}">
+    <input type="submit" value="Cars list"/>
+</form>
+
+<!-- Pop-up message container -->
+<div id="popup-message" class="popup-message" style="display: none;">
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+</div>
+
+<h1>Car {{ object.make }} {{ object.model }}</h1>
+<p>Details:</p>
+<ul>
+    <li>Make: {{ object.make }}</li>
+    <li>Model: {{ object.model }}</li>
+    <li>Category: {{ object.category }}</li>
+    <li>Price per day: {{ object.price_per_day }}</li>
+</ul>
+
+<form method="POST" action="{% url 'car-reserve' object.id %}">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.label_tag }} {{ field }}
+            <div style="color: red">
+                {{ field.errors }}
+            </div>
+            {% if field.help_text %}
+                <p class="help" id="{{ field.auto_id }}_helptext">
+                    {{ field.help_text|safe }}
+                </p>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <div style="color: red">
+        {{ form.non_field_errors }}
+    </div>
+    <input type="submit" value="Reserve"/>
+</form>
+
+<!-- Include the JavaScript to trigger pop-up -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var popup = document.getElementById('popup-message');
+        if (popup.innerHTML.trim() !== '') {
+            popup.style.display = 'block';  // Show the pop-up
+            setTimeout(function() {
+                popup.style.display = 'none';  // Hide the pop-up after 5 seconds
+            }, 5000);
+        }
+    });
+</script>
+
