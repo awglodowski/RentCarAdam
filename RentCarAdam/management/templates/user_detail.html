@@ -1,11 +1,19 @@
-<form action="{% url 'cars-list' %}"><input type="submit" value="Cars list"/></form>
-<h1>Profil {{ object.username }}</h1>
-<h2>Reservations</h2>
-{% for res in reservations %}
-    <!-- Display Objects -->
-    <li>{{ res.car.make }} {{ res.start_date }} - {{ res.end_date }} <form action="{% url 'cars-detail' res.car.id %}"><input type="submit" value="See car"/></form></li>
+{% load crispy_forms_tags %}
 
-    <hr/>
-{% empty %}
-<li>No reservations</li>
-{% endfor %}
+<link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+
+<div class="container">
+
+    <form action="{% url 'cars-list' %}"><input type="submit" value="Cars list"/></form>
+    <h1>Profil {{ object.username }}</h1>
+    <h2>Reservations</h2>
+    {% for res in reservations %}
+        <!-- Display Objects -->
+        <li>{{ res.car.make }} {{ res.start_date }} - {{ res.end_date }} <form action="{% url 'cars-detail' res.car.id %}"><input type="submit" value="See car"/></form></li>
+
+        <hr/>
+    {% empty %}
+    <li>No reservations</li>
+    {% endfor %}
+
+</div>

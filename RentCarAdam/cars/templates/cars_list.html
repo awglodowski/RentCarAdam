@@ -1,19 +1,43 @@
-<form action="{% url 'user-detail' request.user.id %}"><input type="submit" value="User profile"/></form>
-<form method="get">
-    {{ filter.form.as_p }}
-    <button type="submit">Filter</button>
-</form>
+{% load crispy_forms_tags %}
 
-<h1>Cars list</h1>
+
+<link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/slate/bootstrap.min.css">
+
+<div class="container">
+
+
+    <form action="{% url 'user-detail' request.user.id %}"><input type="submit" value="User profile"/></form>
+    <form method="get">
+        {{ filter.form|crispy }}
+        <button type="submit">Filter</button>
+    </form>
+
+    <h1>Cars list</h1>
 <ul>
     <!-- Iterate over object_list -->
     {% for object in object_list %}
     <!-- Display Objects -->
-    <li>{{ object.id }} {{ object.make }} {{ object.model }} <form action="{% url 'cars-detail' object.id %}"><input type="submit" value="Detail"/></form></li>
-
+    <li style="list-style: none; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div>
+                <p style="margin: 0; font-weight: bold;">{{ object.make }} {{ object.model }}</p>
+                <form action="{% url 'cars-detail' object.id %}" style="margin-top: 5px;">
+                    <input type="submit" value="Detail"/>
+                </form>
+            </div>
+            {% if object.car_image %}
+            <img src="{{ object.car_image.url }}" width="150" style="margin-left: 10px;">
+            {% endif %}
+        </div>
+    </li>
     <hr/>
-    <!-- If object_list is empty  -->
     {% empty %}
+    <!-- If object_list is empty -->
     <li>No available cars</li>
     {% endfor %}
 </ul>
+
+
+
+
+</div>

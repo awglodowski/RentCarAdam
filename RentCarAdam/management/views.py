@@ -14,6 +14,13 @@ from cars.models import Reservation
 from management.models import User
 from django.utils.timezone import now
 
+#For user auhentitaction
+# from django.shortcuts import render, redirect
+# from django.contrib.auth import authenticate, login, logout
+# from django.contrib import messages
+# from django.contrib.auth.forms import UserCreationForm
+# from .forms import RegisterUserForm
+
 
 # Create your views here.
 # STWORZYC PROFIL UZYTKOWNIKA (DetailView) check
@@ -31,3 +38,5 @@ class UserDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["reservations"] = Reservation.objects.filter(user_id=self.object.id, start_date__gte=now())
         return context
+
+

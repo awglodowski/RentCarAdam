@@ -23,5 +23,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', CarsListView.as_view(), name="cars-list"),
     path("<int:pk>/", CarsDetailView.as_view(), name="cars-detail"),
-    path("<int:pk>/reserve/", create_reservation, name="car-reserve"),  # Added trailing slash
+    path("<int:pk>/reserve/", create_reservation, name="car-reserve"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

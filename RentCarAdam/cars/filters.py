@@ -27,6 +27,9 @@ class CarFilter(django_filters.FilterSet):
             car_filter = ~Car.get_selected_days_reserved_filter(start_date, end_date)
             queryset = queryset.filter(car_filter)
         return queryset
+
+
+
     # def filter_start_date(self, queryset, field_name, value):
     #    # chcemy domki, ktore sa wolne od start_date do start_date+1
     #    if value != "":
