@@ -29,7 +29,7 @@ class Car(models.Model):
     ]
 
     make = models.CharField(verbose_name="Make", max_length=32, choices=MAKE_CHOICES)
-    model = models.CharField(verbose_name="Model", max_length=32)
+    model = models.CharField(verbose_name="Model", max_length=48)
     category = models.CharField(verbose_name="Category", max_length=32, choices=CATEGORY_CHOICES)
     price_per_day = models.DecimalField(verbose_name="Price per day", max_digits=10, decimal_places=2, default=0.00,)
     car_image = models.ImageField(null=True, blank=True, upload_to="images/")
